@@ -19,10 +19,62 @@ class Home extends StatelessWidget {
                 child: SearchTextField(),
               ),
               SizedBox(width: 10),
-            ], // Row Children
-          )
+            ], // First Row Children
+          ),
+          SizedBox(height: 25),
+          Row(
+            children: [
+              SizedBox(width: 10),
+              Text(
+                "Trending movies",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(width: 120),
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "SEE ALL",
+                    style:TextStyle(
+                      color: Colors.amber,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+              ),
+            ], // Second Row Children
+          ),
+          SizedBox(height:200),
+          Row(
+            children: [
+              SizedBox(width: 10),
+              Text(
+                "Trending shows",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(width: 120),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "SEE ALL",
+                  style:TextStyle(
+                    color: Colors.amber,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ], // Second Row Children
+          ),
         ] // Column Children,
-            ),
+        ),
       ),
       bottomNavigationBar: NavigationBar(),
     );
