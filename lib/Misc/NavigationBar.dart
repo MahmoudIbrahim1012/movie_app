@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,12 +25,11 @@ class NavigationBar extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.grey[800],
-      selectedItemColor: Colors.amber[600],
-      unselectedItemColor: Colors.amber[200],
-      currentIndex: currentIndex,
+    return CurvedNavigationBar(
+      height: 60,
+      color: Colors.blueGrey[800],
+      backgroundColor: Color.fromRGBO(0, 51, 77, 0.5),
+      index: currentIndex,
       onTap:(index) {
         switch(index){
           case 0:
@@ -46,22 +46,10 @@ class NavigationBar extends StatelessWidget {
       } ,
 
       items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.tv_sharp),
-          label: 'TV',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.movie_creation_outlined),
-          label: 'Movies',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_sharp),
-          label: 'Discover',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
+        Icon(Icons.tv_sharp, size:30),
+        Icon(Icons.movie_creation_outlined, size:30),
+        Icon(Icons.search_sharp, size:30),
+        Icon(Icons.person, size:30),
       ], // Nav bar items
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Misc/NavigationBar.dart';
-import 'package:movie_app/Misc/SearchTextField.dart';
 
 class Movies extends StatefulWidget {
   @override
@@ -18,9 +17,6 @@ class _MoviesState extends State<Movies> {
           Row(
             children: [
               SizedBox(width: 10),
-              Flexible(
-                child: SearchTextField(),
-              ),
               SizedBox(width: 10),
             ], // First Row Children
           ),
