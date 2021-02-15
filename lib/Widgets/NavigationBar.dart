@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class NavigationBar extends StatelessWidget {
 
-  int currentIndex;
-  BuildContext context;
+  final int currentIndex;
+  final BuildContext context;
   NavigationBar({this.currentIndex, this.context});
 
   void switchPage(index)

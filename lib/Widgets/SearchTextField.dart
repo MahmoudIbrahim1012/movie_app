@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({
-    Key key,
-  }) : super(key: key);
+  final bool readOnly;
+  final TextEditingController controller;
+  Function onChanged;
+  SearchTextField({this.readOnly, this.controller, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: this.controller,
+      readOnly: this.readOnly,
       style: TextStyle(
         color: Colors.grey[400],
       ),

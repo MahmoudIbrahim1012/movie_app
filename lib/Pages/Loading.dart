@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-
+import 'package:movie_app/Services/Movie.dart';
+import 'package:movie_app/Services/Show.dart';
 class Loading extends StatefulWidget {
   @override
   _LoadingState createState() => _LoadingState();
@@ -9,15 +9,22 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
 
-  setUpHome() async {
-    await new Future.delayed(const Duration(seconds : 5));
-    Navigator.pushReplacementNamed(context, '/home');
+  setUpDiscover() async {
+    Movie instance = Movie();
+    Show instance1 = Show();
+    List movies = await instance.getPopularMovies();
+    List shows = await instance1.getPopularShows();
+    Map data ={
+      'movies': movies,
+      'shows': shows,
+    };
+    Navigator.pushReplacementNamed(context, '/home', arguments: data);
   }
 
   @override
   void initState() {
     super.initState();
-    setUpHome();
+    setUpDiscover();
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:movie_app/Pages/Movies.dart';
 import 'package:movie_app/Pages/TV.dart';
 import 'Pages/Discover.dart';
 import 'Pages/Loading.dart';
+import 'Pages/Search.dart';
 
 void main() => runApp(MaterialApp(
     initialRoute: '/',
@@ -11,6 +12,7 @@ void main() => runApp(MaterialApp(
       '/home': (context) => Discover(),
       '/movies': (context) => Movies(),
       '/shows': (context) => Shows(),
+      '/search': (context) => Search(),
       // '/routename': (context) => routepage(),
     }
 ));
