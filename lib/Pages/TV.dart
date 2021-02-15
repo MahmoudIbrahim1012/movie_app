@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Misc/NavigationBar.dart';
+import 'package:movie_app/Widgets/NavigationBar.dart';
 
 class Shows extends StatefulWidget {
   @override

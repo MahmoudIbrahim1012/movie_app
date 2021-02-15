@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie_app/Misc/NavigationBar.dart';
-import 'package:movie_app/Misc/SearchTextField.dart';
+import 'package:movie_app/Widgets/NavigationBar.dart';
+import 'package:movie_app/Widgets/SearchTextField.dart';
 
-class Home extends StatelessWidget {
+class Discover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
