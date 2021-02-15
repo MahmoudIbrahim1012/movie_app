@@ -5,11 +5,14 @@ class SearchTextField extends StatelessWidget {
   final bool readOnly;
   final TextEditingController controller;
   Function onChanged;
-  SearchTextField({this.readOnly, this.controller, this.onChanged});
+  Function onSubmitted;
+  SearchTextField({this.readOnly, this.controller, this.onChanged, this.onSubmitted});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      textInputAction: TextInputAction.search,
+      onSubmitted: this.onSubmitted,
       controller: this.controller,
       readOnly: this.readOnly,
       style: TextStyle(

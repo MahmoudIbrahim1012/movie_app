@@ -13,7 +13,7 @@ class _SearchState extends State<Search> {
   List results;
 
   Widget initialPage() {
-    return Text("Nothing yet");
+    return Text(" ");
   }
 
   Widget searchPage() {
@@ -75,6 +75,9 @@ class _SearchState extends State<Search> {
             SearchTextField(
               readOnly: false,
               controller: myController,
+              onSubmitted: (value) {
+                search(value);
+              },
             ),
             Expanded(
               child: widget,
