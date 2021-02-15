@@ -8,21 +8,7 @@ class NavigationBar extends StatelessWidget {
   final BuildContext context;
   NavigationBar({this.currentIndex, this.context});
 
-  void switchPage(index)
-  {
-    switch(index){
-      case 0:
-        Navigator.pushReplacementNamed(context, '/shows');
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, '/movies');
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-  }
 
-  }
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
@@ -41,6 +27,8 @@ class NavigationBar extends StatelessWidget {
           case 2:
             Navigator.pushReplacementNamed(context, '/home');
             break;
+          case 3:
+            Navigator.pushReplacementNamed(context, '/started');
         }
 
       } ,

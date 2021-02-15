@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/Pages/GetStarted.dart';
 import 'package:movie_app/Pages/Movies.dart';
 import 'package:movie_app/Pages/TV.dart';
 import 'Pages/Discover.dart';
@@ -13,6 +14,7 @@ void main() => runApp(MaterialApp(
       '/movies': (context) => Movies(),
       '/shows': (context) => Shows(),
       '/search': (context) => Search(),
+      '/started': (context) => GetStarted(),
       // '/routename': (context) => routepage(),
     }
 ));
