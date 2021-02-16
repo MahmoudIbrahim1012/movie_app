@@ -5,6 +5,8 @@ import 'package:movie_app/Pages/TV.dart';
 import 'Pages/Discover.dart';
 import 'Pages/Loading.dart';
 import 'Pages/Search.dart';
+import 'Pages/SignIn.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 void main() => runApp(MaterialApp(
     initialRoute: '/',
