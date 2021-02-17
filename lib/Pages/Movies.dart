@@ -13,7 +13,9 @@ class _MoviesState extends State<Movies> {
       backgroundColor: Colors.grey[900],
       body: Padding(
         padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
           Row(
             children: [
               SizedBox(width: 10),
