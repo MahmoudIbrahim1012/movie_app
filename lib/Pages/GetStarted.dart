@@ -11,7 +11,7 @@ class GetStarted extends StatefulWidget {
 
 class _GetStartedState extends State<GetStarted> {
 
-  _launchURL() async {
+  launchURL() async {
     const url = 'https://www.themoviedb.org/signup';
     if (await canLaunch(url)) {
       await launch(url, enableJavaScript: true);
@@ -74,7 +74,7 @@ class _GetStartedState extends State<GetStarted> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    _launchURL();
+                    launchURL();
                   },
                   child: Text(
                     "GET STARTED",

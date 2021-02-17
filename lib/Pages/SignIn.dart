@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -9,6 +10,15 @@ class _SignInState extends State<SignIn> {
   String user_name = '';
   String password = '';
 
+  launchURL() async {
+    const url = 'https://www.themoviedb.org/reset-password';
+    if (await canLaunch(url)) {
+      await launch(url, enableJavaScript: true);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,11 +26,11 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.black87,
         centerTitle: true,
         title: Text(
-          'sign in',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-        ),
+          'Sign In',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Container(
@@ -31,8 +41,11 @@ class _SignInState extends State<SignIn> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
               decoration: InputDecoration(
-                hintText: 'user name of email',
+                hintText: 'Username',
                 hintStyle: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -43,7 +56,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.white,
+                    color: Colors.white,
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
@@ -52,14 +65,17 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
               ),
-              onSubmitted: (String str)
-              {
+              onSubmitted: (String str) {
                 user_name = str;
               },
             ),
             TextField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              obscureText: true,
               decoration: InputDecoration(
-                hintText: 'password',
+                hintText: 'Password',
                 hintStyle: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -70,8 +86,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 border: InputBorder.none,
               ),
-              onSubmitted: (String str)
-              {
+              onSubmitted: (String str) {
                 password = str;
               },
             ),
@@ -85,7 +100,7 @@ class _SignInState extends State<SignIn> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "forgot password ?",
+                    "Forgot Password?",
                     style: TextStyle(
                       color: Colors.amber,
                       fontSize: 22,
@@ -98,7 +113,7 @@ class _SignInState extends State<SignIn> {
               width: double.infinity,
               child: RaisedButton(
                 padding: EdgeInsets.all(12.0),
-                onPressed: (){},
+                onPressed: () {},
                 color: Color(0xff13233c),
                 child: Text(
                   'SIGN IN',
