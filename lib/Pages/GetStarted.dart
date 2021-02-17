@@ -13,9 +13,7 @@ class _GetStartedState extends State<GetStarted> {
 
   _launchURL() async {
     const url = 'https://www.themoviedb.org/signup';
-    print("Checking");
     if (await canLaunch(url)) {
-      print("Launching");
       await launch(url);
     } else {
       throw 'Could not launch $url';

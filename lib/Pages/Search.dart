@@ -21,7 +21,7 @@ class _SearchState extends State<Search> {
     return ListView.separated(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: 8,
+        itemCount: this.results.length,
         separatorBuilder: (context, index) {
           return Divider(
             height: 20,
