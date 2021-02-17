@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/NavigationBar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'SignIn.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 
 class GetStarted extends StatefulWidget {
   @override
@@ -10,6 +10,18 @@ class GetStarted extends StatefulWidget {
 }
 
 class _GetStartedState extends State<GetStarted> {
+
+  _launchURL() async {
+    const url = 'https://www.themoviedb.org/signup';
+    print("Checking");
+    if (await canLaunch(url)) {
+      print("Launching");
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +35,14 @@ class _GetStartedState extends State<GetStarted> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.network("https://i.pinimg.com/564x/8d/2d/1c/8d2d1c5e0ee9e5141f1fc51567dba572.jpg",
+                Image.network(
+                  "https://i.pinimg.com/564x/8d/2d/1c/8d2d1c5e0ee9e5141f1fc51567dba572.jpg",
                   height: 55,
                   width: 55,
                 ),
                 SizedBox(width: 10),
-                Text("MOVIES TIME",
+                Text(
+                  "MOVIES TIME",
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
@@ -46,7 +60,9 @@ class _GetStartedState extends State<GetStarted> {
                   color: Colors.white,
                   size: 50.0,
                 ),
-                Text('track your shows and movies',
+                SizedBox(height: 40),
+                Text(
+                  'Track your shows and movies',
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.white,
@@ -58,30 +74,34 @@ class _GetStartedState extends State<GetStarted> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                RaisedButton(
-                  padding: EdgeInsets.all(12.0),
-                  onPressed: (){},
-                  color: Color(0xff13233c),
+                ElevatedButton(
+                  onPressed: () async {
+                    _launchURL();
+                  },
                   child: Text(
-                    'Get started',
+                    "GET STARTED",
                     style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
                     ),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)
+                    )
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'have an account ?',
+                      'Have an account?',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     TextButton(
@@ -95,11 +115,10 @@ class _GetStartedState extends State<GetStarted> {
                         });
                       },
                       child: Text(
-                        "sign in",
+                        "sign in".toUpperCase(),
                         style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 20,
                         ),
                       ),
                     ),

@@ -29,6 +29,7 @@ class NavigationBar extends StatelessWidget {
             break;
           case 3:
             Navigator.pushReplacementNamed(context, '/started');
+            break;
         }
 
       } ,

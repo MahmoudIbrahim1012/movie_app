@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/NavigationBar.dart';
 
-
 Map data;
 List popularMovies;
 List popularShows;
@@ -97,9 +96,15 @@ class _DiscoverState extends State<Discover> {
                   shrinkWrap: true,
                   itemCount: 20,
                   itemBuilder: (context, index) {
-                    return Card(
-                        child: Image.network(
-                            'https://image.tmdb.org/t/p/w300/${popularMovies[index]['poster_path']}'));
+                    return GestureDetector(
+                      onTap: () async {
+                        Navigator.pushNamed(context, '/details', arguments: popularMovies[index]['id']);
+                      },
+                      child: Card(
+                          child: Image.network(
+                              'https://image.tmdb.org/t/p/w300/${popularMovies[index]['poster_path']}'),
+                      ),
+                    );
                   }),
             ),
             Row(
