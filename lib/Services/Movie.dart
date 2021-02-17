@@ -16,4 +16,10 @@ class Movie {
     Map data = json.decode(response.body);
     return data;
   }
+
+  Future <Map> getMovieVideos(var movieID) async {
+    Response response = await get('https://api.themoviedb.org/3/movie/$movieID/videos?api_key=$_apiKey&language=en-US');
+    Map data = json.decode(response.body);
+    return data;
+  }
 }

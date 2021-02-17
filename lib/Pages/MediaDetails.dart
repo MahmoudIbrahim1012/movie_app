@@ -1,5 +1,7 @@
+import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_app/Services/Movie.dart';
 
 class MediaDetails extends StatefulWidget {
@@ -12,16 +14,30 @@ class MediaDetails extends StatefulWidget {
 class _MediaDetailsState extends State<MediaDetails> {
   var movieID;
   Map movieDetails;
+  Map video;
 
   Future <void> getMediaReady() async {
     Movie instance = Movie();
     print(this.movieID);
     this.movieDetails = await instance.getMovieDetails(this.movieID);
+    this.video = await instance.getMovieVideos(this.movieID);
+  }
+
+  String toHours(var minutes) {
+    Duration duration = new Duration(minutes: minutes);
+    String time = duration.toString();
+    return "${time.substring(0,1)}h ${time.substring(2,4)}m";
+  }
+
+  String toDate(String date) {
+    DateTime formatted = DateTime.parse(date);
+    return DateFormat.yMMMd().format(formatted).toString();
   }
 
   @override
   void initState() {
     super.initState();
+    toHours(150);
   }
 
   Widget build(BuildContext context) {
@@ -40,7 +56,7 @@ class _MediaDetailsState extends State<MediaDetails> {
                         Expanded(
                           flex: 2,
                           child: Image.network(
-                            "https://i.pinimg.com/564x/8d/2d/1c/8d2d1c5e0ee9e5141f1fc51567dba572.jpg",
+                            "https://image.tmdb.org/t/p/original/${this.movieDetails['backdrop_path']}",
                           ),
                         ),
                         Expanded(
@@ -70,7 +86,7 @@ class _MediaDetailsState extends State<MediaDetails> {
                                   height: 0.0,
                                 ),
                                 Text(
-                                  'my movie name my movie name my movie name',
+                                  this.movieDetails['title'],
                                   softWrap: true,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -86,7 +102,7 @@ class _MediaDetailsState extends State<MediaDetails> {
                                   ),
                                 ),
                                 Text(
-                                  '1h 49m . drama, romance',
+                                  '${toHours(this.movieDetails['runtime'])}. ${this.movieDetails['genres'][0]['name']}, ${this.movieDetails['genres'][1]['name']}',
                                   style: TextStyle(
                                     color: Colors.white,
                                     //fontWeight: FontWeight.w900,
@@ -127,8 +143,9 @@ class _MediaDetailsState extends State<MediaDetails> {
                                         size: 20.0,
                                         color: Colors.white,
                                       ),
+                                      SizedBox(width:2),
                                       Text(
-                                        '  feb 12, 2021',
+                                        toDate(this.movieDetails['release_date']),
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20.0,
@@ -148,8 +165,8 @@ class _MediaDetailsState extends State<MediaDetails> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'movie info : ',
-                                        style: TextStyle(//
+                                        'Movie info',
+                                        style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w900,
                                           fontSize: 30.0,
@@ -166,8 +183,8 @@ class _MediaDetailsState extends State<MediaDetails> {
                                         height: 10.0,
                                       ),
                                       Text(
-                                        "A nameless first person narrator (Edward Norton) attends support groups in attempt to subdue his emotional state and relieve his insomniac state. When he meets Marla (Helena Bonham Carter), another fake attendee of support groups A nameless first person narrator (Edward Norton) attends support groups in attempt to subdue his emotional state and relieve his insomniac state. When he meets Marla (Helena Bonham Carter), another fake attendee of support groups A nameless first person narrator (Edward Norton) attends support groups in attempt to subdue his emotional state and relieve his insomniac state. When he meets Marla (Helena Bonham Carter), another fake attendee of support groups",
-                                        softWrap: true,
+                                        this.movieDetails['overview'],
+                                         softWrap: true,
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20.0,
@@ -188,8 +205,12 @@ class _MediaDetailsState extends State<MediaDetails> {
                                             width: 70,
                                             image: AssetImage('images/youtube.png',),
                                           ),
-                                          onTap: (){
-                                            //go to youtube
+                                          onTap: () async{
+                                            AndroidIntent intent = AndroidIntent(
+                                              action: 'action_view',
+                                              data: "https://www.youtube.com/watch?v=${this.video["results"][0]["key"]}",
+                                            );
+                                            await intent.launch();
                                           },
                                         ),
                                       ),
