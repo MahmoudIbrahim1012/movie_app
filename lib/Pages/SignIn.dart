@@ -184,10 +184,12 @@ class _SignInState extends State<SignIn> {
                   }
                   else
                     {
+                      this.sessionID = response;
+                      print(this.sessionID);
                       setState(() {
                         this.loginResponse = " ";
                       });
-                      Navigator.pushNamed(context, '/profile');
+                      Navigator.pushNamed(context, '/profile', arguments: this.loginResponse);
                     }
 
                 },
