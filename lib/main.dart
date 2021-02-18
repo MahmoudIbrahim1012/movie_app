@@ -8,6 +8,7 @@ import 'Pages/Search.dart';
 
 void main() => runApp(MaterialApp(initialRoute: '/started', routes: {
       '/home': (context) => Discover(),
+      '/profile': (context) => Profile(),
       '/movies': (context) => Movies(),
       '/shows': (context) => Shows(),
       '/search': (context) => Search(),

@@ -187,7 +187,7 @@ class _SignInState extends State<SignIn> {
                       setState(() {
                         this.loginResponse = " ";
                       });
-                      print("Going to profile with token ${this.loginResponse}");
+                      Navigator.pushNamed(context, '/profile');
                     }
 
                 },
