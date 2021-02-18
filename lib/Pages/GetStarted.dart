@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/NavigationBar.dart';
 import 'SignIn.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
+import 'selected.dart';
 
 class GetStarted extends StatefulWidget {
   @override
@@ -87,7 +87,6 @@ class _GetStartedState extends State<GetStarted> {
                     TextButton(
                       onPressed: () {
                         setState(() {
-                          //Navigator.pushReplacementNamed(context, '/sign');
                           showMaterialModalBottomSheet(
                             context: context,
                             builder: (context) => SignIn(),
@@ -114,4 +113,3 @@ class _GetStartedState extends State<GetStarted> {
     );
   }
 }
-//comment
