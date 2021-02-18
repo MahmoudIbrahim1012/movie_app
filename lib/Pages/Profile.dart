@@ -57,48 +57,47 @@ class Profile extends StatelessWidget {
               ),
             ),
             backgroundColor: Colors.grey[900],
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 60.0,
-                    backgroundImage: NetworkImage(
-                      profileDetails["avatar"]["tmdb"]["avatar_path"] != null
-                          ? "https://image.tmdb.org/t/p/w300/${profileDetails["avatar"]["tmdb"]["avatar_path"]}"
-                          : "https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png",
-                    ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 60.0,
+                  backgroundImage: NetworkImage(
+                    profileDetails["avatar"]["tmdb"]["avatar_path"] != null
+                        ? "https://image.tmdb.org/t/p/w300/${profileDetails["avatar"]["tmdb"]["avatar_path"]}"
+                        : "https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png",
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        profileDetails['name'] == null
-                            ? profileDetails['username']
-                            : profileDetails['name'],
-                        softWrap: true,
-                        style: TextStyle(
-                          fontSize: 40.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      profileDetails['name'] == null
+                          ? profileDetails['username']
+                          : profileDetails['name'],
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(width: 10),
-                      Icon(
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Icon(
                         Icons.flag_sharp,
                         color: Colors.red,
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                    width: 150.0,
-                    child: Divider(
-                      color: Colors.teal.shade100,
                     ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.0,
+                  width: 150.0,
+                  child: Divider(
+                    color: Colors.teal.shade100,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             bottomNavigationBar: NavigationBar(
               currentIndex: 3,
