@@ -105,7 +105,6 @@ class _GetStartedState extends State<GetStarted> {
                     TextButton(
                       onPressed: () {
                         setState(() {
-                          //Navigator.pushReplacementNamed(context, '/sign');
                           showMaterialModalBottomSheet(
                             context: context,
                             builder: (context) => SignIn(),

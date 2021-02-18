@@ -6,6 +6,7 @@ import 'package:movie_app/Pages/TV.dart';
 import 'Pages/Discover.dart';
 import 'Pages/Profile.dart';
 import 'Pages/Search.dart';
+import 'Pages/SignIn.dart';
 
 void main() => runApp(MaterialApp(initialRoute: '/started', routes: {
       '/home': (context) => Discover(),
@@ -13,7 +14,7 @@ void main() => runApp(MaterialApp(initialRoute: '/started', routes: {
       '/movies': (context) => Movies(),
       '/shows': (context) => Shows(),
       '/search': (context) => Search(),
-      '/started': (context) => Profile(),
+      '/started': (context) => GetStarted(),
       '/details': (context) => MediaDetails(),
       // '/routename': (context) => routepage(),
     }));

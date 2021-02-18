@@ -19,16 +19,16 @@ class NavigationBar extends StatelessWidget {
       onTap:(index) {
         switch(index){
           case 0:
-            Navigator.pushReplacementNamed(context, '/shows');
+            Navigator.pushNamed(context, '/shows');
             break;
           case 1:
-            Navigator.pushReplacementNamed(context, '/movies');
+            Navigator.pushNamed(context, '/movies');
             break;
           case 2:
             Navigator.pushReplacementNamed(context, '/home');
             break;
           case 3:
-            Navigator.pushReplacementNamed(context, '/started');
+            Navigator.pushNamed(context, '/profile');
             break;
         }
 
