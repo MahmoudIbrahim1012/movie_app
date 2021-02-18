@@ -6,7 +6,7 @@ import 'package:movie_app/Pages/TV.dart';
 import 'Pages/Discover.dart';
 import 'Pages/Search.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/started', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/home', routes: {
       '/home': (context) => Discover(),
       '/movies': (context) => Movies(),
       '/shows': (context) => Shows(),

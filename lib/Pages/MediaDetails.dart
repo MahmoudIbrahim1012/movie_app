@@ -48,50 +48,32 @@ class _MediaDetailsState extends State<MediaDetails> {
           if(snapshot.connectionState == ConnectionState.done)
             {
               return Scaffold(
-                body: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Column(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Image.network(
-                            "https://image.tmdb.org/t/p/original/${this.movieDetails['backdrop_path']}",
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            color: Colors.grey[900],
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ],
-                    ),
-                    ListView(
+                backgroundColor: Colors.grey[900],
+                    body: ListView(
                       scrollDirection: Axis.vertical,
                       children: [
-                        Expanded(
-                          flex: 2,
-                          //fit: FlexFit.tight,
-                          child: Container(
-                            padding: EdgeInsets.all(12.0),
-                            color: Colors.transparent,
-                            child: Column(
+                        Stack(
+                          alignment: AlignmentDirectional.bottomStart,
+                          children: [
+                           Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                            "https://image.tmdb.org/t/p/original/${this.movieDetails['backdrop_path']}",
+                            ),
+                          ),
+                            Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 0.0,
-                                ),
                                 Text(
                                   this.movieDetails['title'],
                                   softWrap: true,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 50.0,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 45.0,
                                     shadows: [
                                       Shadow(
                                         blurRadius: 10.0,
@@ -105,7 +87,6 @@ class _MediaDetailsState extends State<MediaDetails> {
                                   '${toHours(this.movieDetails['runtime'])}. ${this.movieDetails['genres'][0]['name']}, ${this.movieDetails['genres'][1]['name']}',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    //fontWeight: FontWeight.w900,
                                     fontSize: 20.0,
                                     shadows: [
                                       Shadow(
@@ -117,130 +98,128 @@ class _MediaDetailsState extends State<MediaDetails> {
                                   ),
                                 ),
                               ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                        Expanded(
-                          flex: 3,
-                          //fit: FlexFit.tight,
-                          child: Container(
-                            color: Colors.grey[900],
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  // decoration: BoxDecoration(
-                                  //   border: Border.all(
-                                  //     color: Colors.grey[250],
-                                  //   ),
-                                  //   //borderRadius: BorderRadius.circular(10.0),
-                                  // ),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.date_range_outlined,
-                                        size: 20.0,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(width:2),
-                                      Text(
-                                        toDate(this.movieDetails['release_date']),
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                        ),
-                                      ),
-                                    ],
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.white60,
+                                    width: 0.5,
                                   ),
                                 ),
-                                Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  // decoration: BoxDecoration(
-                                  //   border: Border.all(
-                                  //     color: Colors.grey[250],
-                                  //   ),
-                                  // ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Movie info',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 30.0,
-                                          shadows: [
-                                            Shadow(
-                                              blurRadius: 5.0,
-                                              color: Colors.black,
-                                              offset: Offset(2.0, 2.0),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      Text(
-                                        this.movieDetails['overview'],
-                                         softWrap: true,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                        ),
-                                      ),
-                                    ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.date_range_outlined,
+                                    size: 20.0,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width:2),
+                                  Text(
+                                    toDate(this.movieDetails['release_date']),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.white60,
+                                    width: 0.5,
                                   ),
                                 ),
-                                Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: GestureDetector(
-                                          child: Image(
-                                            height: 70,
-                                            width: 70,
-                                            image: AssetImage('images/youtube.png',),
-                                          ),
-                                          onTap: () async{
-                                            AndroidIntent intent = AndroidIntent(
-                                              action: 'action_view',
-                                              data: "https://www.youtube.com/watch?v=${this.video["results"][0]["key"]}",
-                                            );
-                                            await intent.launch();
-                                          },
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Movie info',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 30.0,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 5.0,
+                                          color: Colors.black,
+                                          offset: Offset(2.0, 2.0),
                                         ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text(
-                                          'Watch trailer',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            //fontWeight: FontWeight.w900,
-                                            fontSize: 25.0,
-                                            shadows: [
-                                              Shadow(
-                                                blurRadius: 5.0,
-                                                color: Colors.black,
-                                                offset: Offset(2.0, 2.0),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                )
-                              ],
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    this.movieDetails['overview'],
+                                     softWrap: true,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.white60,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    child: Image(
+                                      height: 70,
+                                      width: 70,
+                                      image: AssetImage('images/youtube.png',),
+                                    ),
+                                    onTap: () async{
+                                      AndroidIntent intent = AndroidIntent(
+                                        action: 'action_view',
+                                        data: "https://www.youtube.com/watch?v=${this.video["results"][0]["key"]}",
+                                      );
+                                      await intent.launch();
+                                    },
+                                  ),
+                                  Text(
+                                    'Watch trailer',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25.0,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 5.0,
+                                          color: Colors.black,
+                                          offset: Offset(2.0, 2.0),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      ],
-                    ),
                   ],
                 ),
                 bottomNavigationBar: GestureDetector(

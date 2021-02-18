@@ -134,11 +134,18 @@ class _SignInState extends State<SignIn> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                      color: Colors.amber,
-                      fontSize: 22,
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                          
+                      });
+                    },
+                    child: Text(
+                      "Forgot Password?",
+                      style: TextStyle(
+                        color: Colors.amber,
+                        fontSize: 22,
+                      ),
                     ),
                   ),
                 ],
@@ -146,13 +153,18 @@ class _SignInState extends State<SignIn> {
             ),
             Container(
               width: double.infinity,
-              child: RaisedButton(
-                padding: EdgeInsets.all(12.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(12.0),
+                  primary: Color(0xff13233c),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
                 onPressed: () async {
                   String requestToken = await getRequestToken();
                   validateLogin(userController.text, passwordController.text, requestToken);
                 },
-                color: Color(0xff13233c),
                 child: Text(
                   'SIGN IN',
                   style: TextStyle(
@@ -160,9 +172,7 @@ class _SignInState extends State<SignIn> {
                     color: Colors.white,
                   ),
                 ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
+                
               ),
             ),
           ],

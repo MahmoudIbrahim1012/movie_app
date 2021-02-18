@@ -87,7 +87,7 @@ class _GetStartedState extends State<GetStarted> {
                     primary: Colors.amber,
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)
-                    )
+                    ),
                   ),
                 ),
                 Row(
