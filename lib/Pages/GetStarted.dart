@@ -112,4 +112,4 @@ class _GetStartedState extends State<GetStarted> {
       bottomNavigationBar: NavigationBar(currentIndex: 3),
     );
   }
-}
+}//

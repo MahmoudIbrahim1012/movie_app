@@ -126,7 +126,7 @@ class _SelectedState extends State<Selected> {
                           children: [
                             Text(
                               'movie info : ',
-                              style: TextStyle(
+                              style: TextStyle(//
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900,
                                 fontSize: 30.0,
