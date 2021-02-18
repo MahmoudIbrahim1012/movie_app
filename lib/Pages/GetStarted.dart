@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Widgets/NavigationBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'SignIn.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -127,7 +126,6 @@ class _GetStartedState extends State<GetStarted> {
           ], // Column Children
         ),
       ),
-      bottomNavigationBar: NavigationBar(currentIndex: 3),
     );
   }
 }

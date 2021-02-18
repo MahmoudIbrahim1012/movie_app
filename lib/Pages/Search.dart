@@ -17,7 +17,6 @@ class _SearchState extends State<Search> {
   }
 
   Widget searchPage() {
-    print(this.results[0]['overview']);
     return ListView.separated(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,

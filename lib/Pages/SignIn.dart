@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -7,9 +10,12 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  String user_name = '';
-  String password = '';
-
+  String userName;
+  String password;
+  String apiKey = '777b17dd0bc91a4466365e9cc8572890';
+  String sessionID;
+  final userController = TextEditingController();
+  final passwordController = TextEditingController();
   launchURL() async {
     const url = 'https://www.themoviedb.org/reset-password';
     if (await canLaunch(url)) {
@@ -17,6 +23,32 @@ class _SignInState extends State<SignIn> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  Future <String> getRequestToken() async {
+    print("Getting request token");
+    Response response = await get('https://api.themoviedb.org/3/authentication/token/new?api_key=$apiKey');
+    if(jsonDecode(response.body)["success"] == true)
+      {
+        String requestToken = jsonDecode(response.body)['request_token'];
+        return requestToken;
+      }
+    else
+      {
+        print("Unsuccessful");
+        return null;
+      }
+  }
+
+  Future <String> validateLogin(String username, String password, var requestToken) async {
+    Map data = {
+      'username': username,
+      'password': password,
+      'request_token': requestToken,
+    };
+    String url = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=$apiKey";
+    Response response = await post(url, body: data);
+    print(response.body);
   }
 
   @override
@@ -41,6 +73,7 @@ class _SignInState extends State<SignIn> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextField(
+              controller: userController,
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -66,10 +99,12 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               onSubmitted: (String str) {
-                user_name = str;
+                userName = str;
               },
+
             ),
             TextField(
+              controller: passwordController,
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -113,7 +148,10 @@ class _SignInState extends State<SignIn> {
               width: double.infinity,
               child: RaisedButton(
                 padding: EdgeInsets.all(12.0),
-                onPressed: () {},
+                onPressed: () async {
+                  String requestToken = await getRequestToken();
+                  validateLogin(userController.text, passwordController.text, requestToken);
+                },
                 color: Color(0xff13233c),
                 child: Text(
                   'SIGN IN',
