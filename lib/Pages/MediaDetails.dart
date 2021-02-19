@@ -62,7 +62,7 @@ class _MediaDetailsState extends State<MediaDetails> {
                             ),
                           ),
                             Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(10.0),
                               child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,8 +72,8 @@ class _MediaDetailsState extends State<MediaDetails> {
                                   softWrap: true,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 45.0,
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.bold,
                                     shadows: [
                                       Shadow(
                                         blurRadius: 10.0,
@@ -87,7 +87,7 @@ class _MediaDetailsState extends State<MediaDetails> {
                                   '${toHours(this.movieDetails['runtime'])}. ${this.movieDetails['genres'][0]['name']}, ${this.movieDetails['genres'][1]['name']}',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20.0,
+                                    fontSize: 15.0,
                                     shadows: [
                                       Shadow(
                                         blurRadius: 3.0,
@@ -150,8 +150,8 @@ class _MediaDetailsState extends State<MediaDetails> {
                                     'Movie info',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 30.0,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
                                       shadows: [
                                         Shadow(
                                           blurRadius: 5.0,
@@ -169,7 +169,7 @@ class _MediaDetailsState extends State<MediaDetails> {
                                      softWrap: true,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 20.0,
+                                      fontSize: 15.0,
                                     ),
                                   ),
                                 ],
@@ -205,7 +205,7 @@ class _MediaDetailsState extends State<MediaDetails> {
                                     'Watch trailer',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 25.0,
+                                      fontSize: 20.0,
                                       shadows: [
                                         Shadow(
                                           blurRadius: 5.0,
@@ -234,9 +234,9 @@ class _MediaDetailsState extends State<MediaDetails> {
                       child: Text(
                         ' + ADD TO WATCH LIST ',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.grey[900],
                           fontWeight: FontWeight.bold,
-                          fontSize: 30.0,
+                          fontSize: 25.0,
                         ),
                       ),
                     ),

@@ -13,7 +13,7 @@ void main() => runApp(MaterialApp(initialRoute: '/started', routes: {
       '/movies': (context) => Movies(),
       '/shows': (context) => Shows(),
       '/search': (context) => Search(),
-      '/started': (context) => GetStarted(),
+      '/started': (context) => Profile(),
       '/details': (context) => MediaDetails(),
       // '/routename': (context) => routepage(),
     }));

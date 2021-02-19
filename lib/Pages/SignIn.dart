@@ -14,9 +14,6 @@ class _SignInState extends State<SignIn> {
   String password;
   String apiKey = '777b17dd0bc91a4466365e9cc8572890';
   String sessionID;
-  String loginResponse = " ";
-  Color statusColor = Colors.white;
-  bool isLogged = false;
   final userController = TextEditingController();
   final passwordController = TextEditingController();
   launchURL() async {
@@ -51,17 +48,7 @@ class _SignInState extends State<SignIn> {
     };
     String url = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=$apiKey";
     Response response = await post(url, body: data);
-    Map returned = jsonDecode(response.body);
-    this.statusColor = returned["success"] ==  true ? Colors.green : Colors.red;
-    print(returned);
-    if(returned["success"] == true)
-      {
-        isLogged = true;
-        return returned["request_token"];
-      }
-    else
-      return returned["status_message"];
-
+    print(response.body);
   }
 
   @override
@@ -85,7 +72,6 @@ class _SignInState extends State<SignIn> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             TextField(
               controller: userController,
               style: TextStyle(
@@ -115,6 +101,7 @@ class _SignInState extends State<SignIn> {
               onSubmitted: (String str) {
                 userName = str;
               },
+
             ),
             TextField(
               controller: passwordController,
@@ -138,19 +125,20 @@ class _SignInState extends State<SignIn> {
                 password = str;
               },
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  //Navigator.pushReplacementNamed(context, '/');
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    this.loginResponse,
-                    style: TextStyle(
-                      color: this.statusColor,
-                    ),
-                  ),
                   TextButton(
                     onPressed: () {
-                      launchURL();
+                      setState(() {
+
+                      });
                     },
                     child: Text(
                       "Forgot Password?",
@@ -175,23 +163,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 onPressed: () async {
                   String requestToken = await getRequestToken();
-                  String response = await validateLogin(userController.text, passwordController.text, requestToken);
-                  if(!isLogged)
-                  {
-                  setState(() {
-                    this.loginResponse = response;
-                  });
-                  }
-                  else
-                    {
-                      this.sessionID = response;
-                      print(this.sessionID);
-                      setState(() {
-                        this.loginResponse = " ";
-                      });
-                      Navigator.pushNamed(context, '/profile', arguments: this.loginResponse);
-                    }
-
+                  validateLogin(userController.text, passwordController.text, requestToken);
                 },
                 child: Text(
                   'SIGN IN',

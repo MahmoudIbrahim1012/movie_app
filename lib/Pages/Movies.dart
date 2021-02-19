@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/Widgets/NavigationBar.dart';
 
@@ -11,31 +12,48 @@ class _MoviesState extends State<Movies> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-          Row(
-            children: [
-              SizedBox(width: 10),
-              SizedBox(width: 10),
-            ], // First Row Children
+      appBar: AppBar(
+        backgroundColor: Colors.grey[900],
+        elevation: 3.0,
+        centerTitle: true,
+        title: Text(
+          'watch list'.toUpperCase(),
+          style: TextStyle(
+            color: Colors.amber,
+            fontSize: 30,
+            fontWeight: FontWeight.w900,
           ),
-          SizedBox(height: 25),
-          Row(
-            children: [
-              Text(
-                "MOVIES PAGE",
-                style: TextStyle(
-                  fontSize: 50,
-                  color: Colors.white,
-                )
-              ),
-            ], // Row Children
-          ),
-        ] // Column Children,
         ),
+      ),
+      body: Container(
+        height: 200,
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Image.network('https://image.tmdb.org/t/p/original//drulhSX7P5TQlEMQZ3JoXKSDEfz.jpg'),
+                title: Text(
+                  'my move name',
+                  softWrap: true,
+                  style:TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20.0,
+                  ),
+                ),
+                subtitle: Text(
+                  'sdfghjkl;uytdfghjkl;sdfghjkl;ertyuiopxcvbnmrtyuiocvhudvisdhnviejgowisgbvujsdgpoweugfodshgr',
+                  softWrap: true,
+                  style:TextStyle(
+                    color: Colors.white,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              );
+            }),
       ),
       bottomNavigationBar: NavigationBar(currentIndex: 1,),
     );
