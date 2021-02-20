@@ -84,10 +84,10 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                         WidgetSpan(
-                          child: Icon(
-                            Icons.flag_sharp,
-                            color: Colors.red,
-                          ),
+                          child: SizedBox(width: 2),
+                        ),
+                        WidgetSpan(
+                          child: Image.network("https://www.countryflags.io/${profileDetails['iso_3166_1']}/flat/32.png"),
                         ),
                       ],
                     ),
