@@ -8,6 +8,9 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
+String sessionID;
+String accountID;
+
 class _SearchState extends State<Search> {
   final myController = TextEditingController();
   List results;
@@ -28,22 +31,30 @@ class _SearchState extends State<Search> {
           );
         },
         itemBuilder: (context, index) {
-          return ListTile(
-            leading: results[index]["poster_path"] != null ? Image.network(
-                "https://image.tmdb.org/t/p/w300/${results[index]["poster_path"]}"): Icon(Icons.movie_outlined),
-            title: Text(
-              results[index]['name'] == null ? results[index]['title'] : results[index]['name'],
-              style: TextStyle(
-                color: Colors.white,
+          return GestureDetector(
+            onTap: () {
+              Map <String, dynamic> data  = {"id": results[index]['id'].toString(),
+                "sessionID": sessionID,
+                "accountID": accountID};
+              results[index]['media_type'] == 'tv' ? Navigator.pushNamed(context, '/showdetails', arguments: data) : Navigator.pushNamed(context, '/moviedetails', arguments: data);
+            },
+            child: ListTile(
+              leading: results[index]["poster_path"] != null ? Image.network(
+                  "https://image.tmdb.org/t/p/w300/${results[index]["poster_path"]}"): Icon(Icons.movie_outlined),
+              title: Text(
+                results[index]['name'] == null ? results[index]['title'] : results[index]['name'],
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-            ),
-            subtitle: Text(
-                results[index]['overview'],
-              style:TextStyle(
-                color: Colors.white70,
+              subtitle: Text(
+                  results[index]['overview'],
+                style:TextStyle(
+                  color: Colors.white70,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
             ),
           );
         });
@@ -55,13 +66,20 @@ class _SearchState extends State<Search> {
         'https://api.themoviedb.org/3/search/multi?api_key=$apiKey&language=en-US&query=$query&page=1&include_adult=false');
     Map result = jsonDecode(response.body);
     this.results = result['results'];
+    print(result['results']);
     setState(() {
-      build(context);
+      Widget widget = myController.text.isNotEmpty ? searchPage() : initialPage();
     });
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
+    Map data = ModalRoute.of(context).settings.arguments;
+    sessionID = data['sessionID'];
+    accountID = data['accountID'].toString();
     Widget widget;
     widget = myController.text.isNotEmpty ? searchPage() : initialPage();
     return Scaffold(

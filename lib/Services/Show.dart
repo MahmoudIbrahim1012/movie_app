@@ -12,4 +12,17 @@ class Show {
     Map data = json.decode(response.body);
     return data['results'];
   }
+  Future <Map> getShowVideos(var tvID) async {
+    Response response = await get(
+        'https://api.themoviedb.org/3/tv/$tvID/videos?api_key=$_apiKey&language=en-US');
+    Map data = json.decode(response.body);
+    return data;
+  }
+
+  Future <Map> getShowDetails(var tvID) async {
+    Response response = await get('https://api.themoviedb.org/3/tv/$tvID?api_key=$_apiKey&language=en-US');
+    Map data = json.decode(response.body);
+    return data;
+  }
+
 }

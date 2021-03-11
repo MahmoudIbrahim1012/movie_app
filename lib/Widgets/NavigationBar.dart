@@ -6,7 +6,8 @@ class NavigationBar extends StatelessWidget {
 
   final int currentIndex;
   final BuildContext context;
-  NavigationBar({this.currentIndex, this.context});
+  var data;
+  NavigationBar({this.currentIndex, this.context, this.data});
 
 
   @override
@@ -19,16 +20,16 @@ class NavigationBar extends StatelessWidget {
       onTap:(index) {
         switch(index){
           case 0:
-            Navigator.pushNamed(context, '/shows');
+            Navigator.pushNamed(context, '/shows', arguments: this.data);
             break;
           case 1:
-            Navigator.pushNamed(context, '/movies');
+            Navigator.pushNamed(context, '/movies', arguments: this.data);
             break;
           case 2:
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, '/home', arguments: this.data);
             break;
           case 3:
-            Navigator.pushNamed(context, '/profile');
+            Navigator.pushNamed(context, '/profile', arguments: this.data);
             break;
         }
 

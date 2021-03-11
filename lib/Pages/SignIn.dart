@@ -132,10 +132,9 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 onPressed: () async {
-                  
-                  await validateLogin( requestToken);
+                  await validateLogin(requestToken);
                   String sessionID = await createSession();
-                  Navigator.pushReplacementNamed(context, '/profile', arguments: sessionID);
+                  Navigator.pushReplacementNamed(context, '/profile', arguments: {'sessionID': sessionID});
                 },
                 child: Text(
                   'SIGN IN',

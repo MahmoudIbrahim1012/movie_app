@@ -25,9 +25,13 @@ class _DiscoverState extends State<Discover> {
     popularMovies = await instance.getPopularMovies();
     popularShows = await instance1.getPopularShows();
   }
-
+  String sessionID;
+  String accountID;
   @override
   Widget build(BuildContext context) {
+    Map data = (ModalRoute.of(context).settings.arguments);
+    this.sessionID = data['sessionID'];
+    this.accountID = data['id'].toString();
     return FutureBuilder(
       future: setUpDiscover(),
       builder: (context, snapshot) {
@@ -44,9 +48,12 @@ class _DiscoverState extends State<Discover> {
                         children: [
                           SizedBox(width: 10),
                           Flexible(
-                            child: GestureDetector(
+                            child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, '/search');
+                                Map <String, dynamic> data  = {
+                                  "sessionID": this.sessionID,
+                                  "accountID": this.accountID};
+                                Navigator.pushNamed(context, '/search', arguments: data);
                               },
                               child: Container(
                                 height: 50,
@@ -107,13 +114,20 @@ class _DiscoverState extends State<Discover> {
                             shrinkWrap: true,
                             itemCount: 20,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
+                              return InkWell(
                                 onTap: () async {
-                                  Navigator.pushNamed(context, '/details',
-                                      arguments: popularMovies[index]['id']);
+                                  Map <String, dynamic> data  = {"id": popularMovies[index]['id'].toString(),
+                                    "sessionID": this.sessionID,
+                                    "accountID": this.accountID};
+                                  Navigator.pushNamed(context, '/moviedetails',
+                                      arguments: data);
                                 },
-                                child: Card(
-                                  child: Image.network(
+                                child: Hero(
+                                  tag: 'movie${popularMovies[index]['id']}',
+                                  child: FadeInImage.assetNetwork(
+                                      placeholder:
+                                      'images/movie_placeholder.png',
+                                      image:
                                       'https://image.tmdb.org/t/p/w300/${popularMovies[index]['poster_path']}'),
                                 ),
                               );
@@ -153,16 +167,32 @@ class _DiscoverState extends State<Discover> {
                             shrinkWrap: true,
                             itemCount: 20,
                             itemBuilder: (context, index) {
-                              return Card(
-                                  child: Image.network(
-                                      'https://image.tmdb.org/t/p/w300/${popularShows[index]['poster_path']}'));
+                              return InkWell(
+                                onTap: () async {
+                                  Map <String, dynamic> data  = {"id": popularShows[index]['id'].toString(),
+                                    "sessionID": this.sessionID,
+                                  "accountID": this.accountID};
+                                  Navigator.pushNamed(context, '/showdetails',
+                                      arguments: data);
+                                },
+                                child: Card(
+                                  child: FadeInImage.assetNetwork(
+                                      placeholder:
+                                      'images/movie_placeholder.png',
+                                      image:
+                                      'https://image.tmdb.org/t/p/w300/${popularShows[index]['poster_path']}'),
+                                ),
+                              );
                             }),
                       ),
                     ] // Column Children,
-                    ),
+                ),
               ),
             ),
-            bottomNavigationBar: NavigationBar(currentIndex: 2),
+            bottomNavigationBar: NavigationBar(currentIndex: 2, data: ModalRoute
+                .of(context)
+                .settings
+                .arguments),
           );
         } else {
           return Scaffold(

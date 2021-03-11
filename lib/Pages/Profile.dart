@@ -7,25 +7,27 @@ import 'package:movie_app/Widgets/NavigationBar.dart';
 
 String sessionID;
 Map profileDetails;
+Map data;
 
 class Profile extends StatelessWidget {
   final String apiKey = "777b17dd0bc91a4466365e9cc8572890";
 
   Future getProfileReady() async {
-    print(sessionID);
     Response response = await get(
         "https://api.themoviedb.org/3/account?api_key=${this.apiKey}&session_id=$sessionID");
     print(response.body);
     if (jsonDecode(response.body)['success'] == false) {
     } else {
       profileDetails = jsonDecode(response.body);
+      data = {'id': profileDetails['id'].toString(), 'sessionID': sessionID};
     }
   }
 
   @override
   Widget build(BuildContext context) {
     if (ModalRoute.of(context).settings.arguments != null) {
-      sessionID = ModalRoute.of(context).settings.arguments;
+      Map data = ModalRoute.of(context).settings.arguments;
+      sessionID = data['sessionID'];
     }
     return FutureBuilder(
       future: getProfileReady(),
@@ -87,29 +89,12 @@ class Profile extends StatelessWidget {
                           child: SizedBox(width: 2),
                         ),
                         WidgetSpan(
-                          child: Image.network("https://www.countryflags.io/${profileDetails['iso_3166_1']}/flat/32.png"),
+                          child: Image.network(
+                              "https://www.countryflags.io/${profileDetails['iso_3166_1']}/flat/32.png"),
                         ),
                       ],
                     ),
                   ),
-                 /* Row(
-                    children: [
-                      Text(
-                        profileDetails['name'] == ""
-                            ? profileDetails['username']
-                            : profileDetails['name'],
-                        style: TextStyle(
-                          fontSize: 40.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Icon(
-                        Icons.flag_sharp,
-                        color: Colors.red,
-                      ),
-                    ],
-                  ),*/
                   SizedBox(
                     height: 20.0,
                     width: 150.0,
@@ -122,6 +107,7 @@ class Profile extends StatelessWidget {
             ),
             bottomNavigationBar: NavigationBar(
               currentIndex: 3,
+              data: data,
             ),
           );
         } else {
