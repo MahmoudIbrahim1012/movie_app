@@ -85,6 +85,9 @@ class _ShowsState extends State<Shows> {
                           ),
                           onPressed: () async {
                             await removeShow(watchList[index]['id']);
+                            setState(() {
+                              watchList.removeAt(index);
+                            });
                           },
                         ),
                       ),

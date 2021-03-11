@@ -92,6 +92,9 @@ class _MoviesState extends State<Movies> {
                           ),
                           onPressed: () async {
                             await removeMovie(watchList[index]['id']);
+                            setState(() {
+                              watchList.removeAt(index);
+                            });
                           },
                         ),
                       ),
